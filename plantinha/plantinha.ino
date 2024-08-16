@@ -25,7 +25,7 @@ byte gotaCheia[8]={
   B00000,
 };
 
-LiquidCrystal lcd(2, 4, 6, 8, 10, 11);
+LiquidCrystal lcd(2, 3, 4, 5, 6, 7);
 Servo servoPlanta;
 int sensorUmidade = A0;
 int valorSensor;
@@ -40,13 +40,13 @@ void setup() {
   // Crie o ícone personalizado no LCD
   lcd.createChar(0, gotaVazia);
   lcd.createChar(1, gotaCheia);
-  
+
   // Limpa o display
   lcd.clear();
   // put your setup code here, to run once:
   Serial.begin(9600);
   pinMode(sensorUmidade, INPUT);
-  servoPlanta.attach(7);
+  servoPlanta.attach(8);
   servoPlanta.write(0);
 }
 
