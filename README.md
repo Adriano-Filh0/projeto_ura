@@ -29,7 +29,7 @@
  - [Referências](#-referências)
 </div>
 
-## 📄 Descrição do Projeto !!REVISAR!!
+## 📄 Descrição do Projeto
 O projeto tem como obetivo ser uma forma simpática e intuitiva de representar a importância de aguar plantas e também entregar feedback da condição do solo.
 Fazemos isso se utilizando da plataforma Arduino e alguns sensores e atuadores, senda esta a parte eletrônica que é agrupada em uma caixa simples de papelão detalhada para simular um "terreno" e com uma Flor de plástico montada no centro.
 <div>
@@ -65,7 +65,7 @@ Fazemos isso se utilizando da plataforma Arduino e alguns sensores e atuadores, 
 
 ## 📝 Como Fazer
 
-### 🖥️ Explicação Circuito - Hardware  !!REVISAR!!
+### 🖥️ Explicação Circuito - Hardware
 <p>Breve Explicação sobre a Arquitetura do Circuito:</p>
 
 1. Entradas Digitais - Arduíno:
@@ -116,7 +116,7 @@ Fazemos isso se utilizando da plataforma Arduino e alguns sensores e atuadores, 
 #include <LiquidCrystal.h>
 ```
 
-### 👩‍💻 Explicação Código - Software !!FAZER!!
+### 👩‍💻 Explicação Código - Software
 <p>Aqui está um resumo explicativo do código.</p>
 
 
