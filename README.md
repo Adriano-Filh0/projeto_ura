@@ -119,38 +119,27 @@ Fazemos isso se utilizando da plataforma Arduino e alguns sensores e atuadores, 
 ### 👩‍💻 Explicação Código - Software !!FAZER!!
 <p>Aqui está um resumo explicativo do código.</p>
 
-1. Definição de Pinos:
-   - Começamos definindo valores constantes para as notas musicais dos sons e das melodias.
 
-2. Definição de Variáveis:
-   - Variáveis são definidas para manipular:
-      - As melodias;
-      - Os pinos para o Buzzer, os Leds e os Botões;
-      - O status dos Botões;
-      - Temporizadores;
-      - Indicador do Modo Demonstração;
-      - O status do Jogo;
-      - A sequência de cores que o jogador deve responder;
-      - As etapas e fases do Jogo;
-      - As respostas do Jogador (serve para guardar o valor);
-      - Variável para guardar o Botão pressionado pelo jogador;
-      - Indicador quando perder o jogo;
-      - Tempo para resposta do jogador;
-    - Constante são definidas para manipular:
-      - O número máximo de combinações ou fases de jogo;
-      - O tempo de cada cor (millisegundos). 
+1. Definição das variáveis:
+   - Varíáveis relacionadas ao servo;
+   - Variáveis relacionadas ao display LCD 16X2;
+   - Variáveis relacionadas ao sensor de umidade;
+     
 
-3. Função de Configuração (setup):
+2. Função de Configuração (setup):
    - Inicializa a comunicação serial a 9600 bps;
-   - Define os pinos dos 4 Leds e do Buzzer como saída;
-   - Define os pinos dos Botões como entrada;
+   - Inicializa os pinos do servo;
+   - Chama a função do lcd para desenhar as gotas;
+   - Registra o sensor de umidade como entrada de dados;
    - Registro de tempo e inicializa randomização;
-   - Inicializando o random através de uma leitura da porta analógica.
+   - Inicializando o random através de uma leitura da porta analógica;
    
-5. Função "loop":
-   - Há dois laços de repetição (while).
-     - O while do Modo Demonstração: chama as funções "modoDemo" e "leituraBotoes" quando a variável "statusJogo" é diferente de 1 e utiliza a função Serial.print para imprimir um "." na porta serial;
-     - O while do Modo Jogo: chama a função "modoJogo" quando  a variável "statusJogo" é igual a 1.
+3. Função "loop":
+   - Atualiza valorSensor com os valores analógicos vindos do sensor de umidade(sensorUmidade);
+   - Uilizamos a função mapManual para filtrar os valores do sensor e alocalos na variável novoValorSensor e em seguidas printamos a leitura;
+   - Calculamos a posição angular do servo via condição e loop(if e while), onde a posição do servo é atualizada lentamente junto a um delay;
+   - Em "lcd.setCursor(0, 0);" setamos o "cursor" que desenha os pixels das gotas cheias e vazias, logo após definimos os intervalos de 30 para as gotas e o texto;
+   - No For é feito o loop que define o nível de gotas na tela e em seguida o texto que ira aparecer através das condições;
 
 ## 🗂️ Documentação do Projeto !!FAZER!!
 
