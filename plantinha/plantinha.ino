@@ -1,8 +1,6 @@
 #include <Servo.h>
 #include <LiquidCrystal.h>
 
-const int textoMax = 50;
-
 byte gotaVazia[8]={
   B00000,
   B00100,
@@ -25,13 +23,20 @@ byte gotaCheia[8]={
   B00000,
 };
 
+int mapManual(int valor, int minOrigem, int maxOrigem, int minDestino, int maxDestino) {
+  return minDestino + ((valor - minOrigem) * (maxDestino - minDestino)) / (maxOrigem - minOrigem);
+}
+
+const int atrasoMovimento = 20;
 LiquidCrystal lcd(2, 3, 4, 5, 6, 7);
 Servo servoPlanta;
 int sensorUmidade = A0;
 int valorSensor;
 int novoValorSensor;
+int anguloAtual = 0;
+int anguloDestino = 0;
 int digito_display = 0;
-char texto[textoMax];
+char texto[16];
 
 void setup() {
   // Inicialize o LCD com o número de colunas e linhas
@@ -40,34 +45,39 @@ void setup() {
   // Crie o ícone personalizado no LCD
   lcd.createChar(0, gotaVazia);
   lcd.createChar(1, gotaCheia);
-
-  // Limpa o display
-  lcd.clear();
+  
   // put your setup code here, to run once:
   Serial.begin(9600);
   pinMode(sensorUmidade, INPUT);
   servoPlanta.attach(8);
-  servoPlanta.write(0);
+  //servoPlanta.write(0);
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
-valorSensor = analogRead(sensorUmidade);
-novoValorSensor = map(valorSensor,430,1023, 120, 180);
-Serial.println(novoValorSensor);
-servoPlanta.write(novoValorSensor);
-//delay(500);
+  valorSensor = analogRead(sensorUmidade);
+  novoValorSensor = mapManual(valorSensor, 430, 1023, 120, 180);
+  Serial.println(novoValorSensor);
+  // Calcula a nova posição do servo
+  if (novoValorSensor != anguloDestino) {
+    anguloDestino = novoValorSensor;
 
-  // Exiba os ícones no LCD
-  lcd.clear();
+    // Move o servo suavemente até a nova posição
+    while (anguloAtual != anguloDestino) {
+      if (anguloAtual < anguloDestino) {
+        anguloAtual++;
+      } else {
+        anguloAtual--;
+      }
+      servoPlanta.write(anguloAtual);
+      delay(atrasoMovimento); // Tempo entre cada atualização do ângulo
+    }
+  }
+
+  
   lcd.setCursor(0, 0);
 
   digito_display = -(novoValorSensor-120)/4;
-
-  // strcpy(texto, "preciso de agua");
-  // strcpy(texto, "estou ficando sem agua");
-  // strcpy(texto, "estou com agua");
-  // strcpy(texto, "estou com agua");
 
   for(int i=-15; i<15; i++){
 
@@ -78,16 +88,15 @@ servoPlanta.write(novoValorSensor);
     }
   }
 
+  lcd.setCursor(0, 1);
   if (digito_display < -11){
-    strcpy(texto, "preciso de agua");
+    lcd.print("preciso de agua");
   } else if(digito_display < -5){
-    strcpy(texto, "estou com agua");
+    lcd.print("estou com agua");
   } else {
-    strcpy(texto, "agua demais !!");
+    lcd.print("agua demais !!!");
   }
 
-  lcd.setCursor(0, 1);
   lcd.print(texto);
-  //lcd.print(digito_display);
   delay(500);
 }
