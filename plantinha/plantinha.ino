@@ -23,18 +23,13 @@ byte gotaCheia[8]={
   B00000,
 };
 
-int mapManual(int valor, int minOrigem, int maxOrigem, int minDestino, int maxDestino) {
-  return minDestino + ((valor - minOrigem) * (maxDestino - minDestino)) / (maxOrigem - minOrigem);
-}
 
-const int atrasoMovimento = 20;
+
 LiquidCrystal lcd(2, 3, 4, 5, 6, 7);
 Servo servoPlanta;
 int sensorUmidade = A0;
 int valorSensor;
-int novoValorSensor;
-int anguloAtual = 0;
-int anguloDestino = 0;
+int novoValorSensor; 
 int digito_display = 0;
 char texto[16];
 
@@ -50,29 +45,17 @@ void setup() {
   Serial.begin(9600);
   pinMode(sensorUmidade, INPUT);
   servoPlanta.attach(8);
-  //servoPlanta.write(0);
+  servoPlanta.write(0);
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
   valorSensor = analogRead(sensorUmidade);
-  novoValorSensor = mapManual(valorSensor, 430, 1023, 120, 180);
+  novoValorSensor = map(valorSensor, 400, 1023, 120, 180);
   Serial.println(novoValorSensor);
+  servoPlanta.write(novoValorSensor);
   // Calcula a nova posição do servo
-  if (novoValorSensor != anguloDestino) {
-    anguloDestino = novoValorSensor;
-
-    // Move o servo suavemente até a nova posição
-    while (anguloAtual != anguloDestino) {
-      if (anguloAtual < anguloDestino) {
-        anguloAtual++;
-      } else {
-        anguloAtual--;
-      }
-      servoPlanta.write(anguloAtual);
-      delay(atrasoMovimento); // Tempo entre cada atualização do ângulo
-    }
-  }
+  
 
   
   lcd.setCursor(0, 0);
@@ -91,10 +74,16 @@ void loop() {
   lcd.setCursor(0, 1);
   if (digito_display < -11){
     lcd.print("preciso de agua");
-  } else if(digito_display < -5){
+    //servoPlanta.write(120);
+    delay(1000);
+  } else if(digito_display < -3){
     lcd.print("estou com agua");
+    //servoPlanta.write(140);
+    delay(1000);
   } else {
     lcd.print("agua demais !!!");
+    //ervoPlanta.write(180);
+    delay(1000);
   }
 
   lcd.print(texto);
