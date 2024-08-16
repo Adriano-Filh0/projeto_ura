@@ -42,7 +42,7 @@
 | 1     | Arduíno Uno R3      | 
 | 1     | Display LCD 16x2       |
 | 1     | Servo motor - 180°    |
-| 3     | Resistores de 1k Ohms (ou valor adequado o display) |
+| 1     | Resistencia de 3.3K Ohms (ou valor adequado o display) |
 | 1     | Sensor de umidade do solo digital |
 | 1     | Higrômetro de umidade do solo|
 | 1     | Protoboard |
