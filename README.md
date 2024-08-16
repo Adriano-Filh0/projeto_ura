@@ -29,9 +29,12 @@
  - [Referências](#-referências)
 </div>
 
-## 📄 Descrição do Projeto !!FAZER!!
+## 📄 Descrição do Projeto !!REVISAR!!
+O projeto tem como obetivo ser uma forma simpática e intuitiva de representar a importância de aguar plantas e também entregar feedback da condição do solo.
+Fazemos isso se utilizando da plataforma Arduino e alguns sensores e atuadores, senda esta a parte eletrônica que é agrupada em uma caixa simples de papelão detalhada para simular um "terreno" e com uma Flor de plástico montada no centro.
+<div>
 ![Descrição da imagem](https://ibb.co/QQr7ytx)
-
+</div>
 
 
 
@@ -41,6 +44,7 @@
 | :---:       |     :---:       |  
 | 1     | Arduíno Uno R3      | 
 | 1     | Display LCD 16x2       |
+| 1     | Cabo USB tipo A/B       |
 | 1     | Servo motor - 180°    |
 | 1     | Resistencia de 3.3K Ohms (ou valor adequado o display) |
 | 1     | Sensor de umidade do solo digital |
@@ -61,55 +65,39 @@
 
 ## 📝 Como Fazer
 
-### 🖥️ Explicação Circuito - Hardware  !!FAZER!!
-
-<div align="center">
- 
-<img src="https://github.com/wwwmisla/ura-project/blob/main/img/Copy%20of%20Batma%C2%B2m%20-%20URA.png" align="center">
-
-</div>
-
-<div align="center">
-<br>
-<img src="https://github.com/wwwmisla/ura-project/blob/main/img/WhatsApp%20Image%202023-11-29%20at%204.21.47%20PM.jpeg" width="400" align="center">
-
-</div>
-
-#### 🌱 Circuito Virtual & 💧 Circuito Prático !!FAZER!!
-
+### 🖥️ Explicação Circuito - Hardware  !!REVISAR!!
 <p>Breve Explicação sobre a Arquitetura do Circuito:</p>
 
 1. Entradas Digitais - Arduíno:
    - Componentes de Entrada:
-     - 4 Botões.
+     - Sensor de Umidade.
      
    - Componentes de Saída:
-     - 4 Leds e 1 Buzzer.
+     - Display LCD 16x2.
+     
         
 2. Portas Digitais Utilizadas - Arduíno:
-   - 2, 3, 4 e 5;
-     - Jumpers Vermelho, Amarelo, Branco e Verde -> Botões Dó, Ré, Mi e Fa.
-   - 6, 7, 8 e 9;
-     - Jumpers Vermelho, Amarelo, Branco e Verde -> Ânodo dos Leds VM, AM, BR e VD.
-   - 10;
-     - Jumper Marrom -> Positivo do Pino Buzzer.
+   - Display LCD 16X2 -> Feedback Visual;
+     - 2, 3, 4, 5, 6 e 7.
+   - Servo motor -> Movimento da planta;
+     - 8.
+   - Sensor de umidade -> Nivel de umidade do solo.;
+     - A0.
    - GND;
      - Área de Alimentação da Protoboard (-).
+   - VCC;
+     - Área de Alimentação da Protoboard (+).
+      
        
  3. Protoboard:
-    - Resistores - Conectados a área de alimentação da protoboard (-):
-      - Resistores Conectados aos Cátodos dos Leds.
-    - Buzzer:
-      - Resistor no Positivo do Buzzer;
-      - Jumper com negativo vindo da área de alimentação da protoboard.
-    - Botões:
-       - Todos os 4 botões recebem jumpers (com cores respectivas as notas) que saem da área de alimentação da protoboard (-).
-    - A trilha superior de alimentação (-) passa um jumper (preto) para a trilha inferior de alimentação (-).   
-
-<p>Inserimos os componentes na Protoboard como mostra a imagem com o circuito virtual. Sempre tendo atenção e cuidado com os cabos de ligação antes de iniciar o Arduíno e lembrando que ele tem que estar inteiramente desligado enquanto realizamos a montagem do nosso circuito!</p>
-    - Ter atenção de que os Leds possuem polaridade;
-    - Ter atenção de que o Buzzer possui polaridade.
-
+    - Servo Motor
+      - Conectados a área de alimentação da protoboard (- , +);
+    - Sensor de umidade:
+      - Conectados a área de alimentação da protoboard (- , +);
+    - Display LCD:
+       - Conectados a área de alimentação da protoboard (- , +):
+       - Conectado a resistencia (3.3k);
+         
 ### 🔨 Software
 * ![Arduino IDE](https://img.shields.io/badge/Arduino_IDE-00979D?style=for-the-badge&logo=arduino&logoColor=white) [-](https://www.arduino.cc/en/software)
 * OU
